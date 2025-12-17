@@ -14,9 +14,6 @@ Example:
 Input: 2 + 2
 Output: 2 + 2 is 4 which is calculated by adding 2 with 2.
 
-Input: 3 * 10
-Output: 3 * 10 is 30 which is calculated by multiplying 3 by 10. Fun fact you can even multiply 10 * 3 which gives same result.
-
 Input: Why is sky blue?
 Output: Bruh? You alright? Is it maths query?
 """
@@ -26,13 +23,17 @@ client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 conversation_history = [
     {
         "role": "user",
-        "content": "What are the three largest cities in Spain?"
+        "parts": [{"text": "What are the three largest cities in Spain?"}]
     }
 ]
 
-interaction1 = client.interactions.create(
-    model="gemini-2.5-flash",
-    input=conversation_history
+# Using gemini-1.5-flash which has the most reliable free tier access
+response = client.models.generate_content(
+    model="gemini-2.5-flash", 
+    contents=conversation_history,
+    config={
+        "system_instruction": system_prompt
+    }
 )
 
-print(f"Model: {interaction1.outputs[-1].text}")
+print(response.text)
