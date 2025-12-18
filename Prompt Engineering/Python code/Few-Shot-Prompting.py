@@ -27,7 +27,6 @@ conversation_history = [
     }
 ]
 
-# Using gemini-1.5-flash which has the most reliable free tier access
 response = client.models.generate_content(
     model="gemini-2.5-flash", 
     contents=conversation_history,
