@@ -31,7 +31,7 @@ Output: {{ step: "result", content: "2 + 2 = 4 and that is calculated by adding 
 
 
 const chat = await ai.chats.create({
-  model: "gemini-2.5-flash", 
+  model: "gemini-2.5-flash-lite", 
   config: {
     responseMimeType: "application/json",
     responseJsonSchema: {
